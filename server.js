@@ -6,14 +6,13 @@ const cors = require('cors');
 const app = express();
 const PORT = 8080;
 
-// Middleware
+
 app.use(bodyParser.json());
 app.use(cors());
 
-// File path for the JSON data
+
 const USERS_FILE = './users.json';
 
-// Helper to read users data
 const readUsers = () => {
     if (!fs.existsSync(USERS_FILE)) {
         fs.writeFileSync(USERS_FILE, JSON.stringify([]));
@@ -22,12 +21,11 @@ const readUsers = () => {
     return JSON.parse(data);    
 };
 
-// Helper to write users data
+
 const writeUsers = (data) => {
     fs.writeFileSync(USERS_FILE, JSON.stringify(data, null, 2));
 };
 
-// Signup Route
 app.post('/signup', (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -55,7 +53,6 @@ app.post('/signup', (req, res) => {
 });
 
 
-// Login Route
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
 
@@ -69,7 +66,6 @@ app.post('/login', (req, res) => {
     res.status(200).json({ success: true, message: 'Login successful', user: { id: user.id, name: user.name, email: user.email } });
 });
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
