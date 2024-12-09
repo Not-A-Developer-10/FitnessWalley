@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Training | Fitness Walley</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+    <style>
+        body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Consistent typography */
+    background-color: #0b0b0b;
+    color: #333;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000; /* Fitness Walley's black theme */
+    color: rgb(253, 0, 0);
+}
+
+.logo h3 {
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.header-right a {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.hero-section {
+    position: relative;
+    background: url('img/personal_training_banner.jpg') no-repeat center center/cover;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+    color: white;
+}
+
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: 0;
+}
+
+.hero-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+}
+
+.content-section {
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    border-radius: 8px;
+}
+
+.content-section h2 {
+    color: #f91a2c; /* Fitness Walley's primary color */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.content-section p {
+    line-height: 1.8;
+    color: #555;
+}
+
+.benefits-header {
+    text-align: center;
+    padding: 20px 10px;
+    margin-top: 20px;
+}
+
+.benefits-header h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #f91a2c; /* Fitness Walley's primary color */
+    margin: 0;
+}
+
+.benefits-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 10%;
+    gap: 20px; /* Space between cards */
+}
+
+.benefit-card {
+    flex: 1; /* Ensures cards are equally spaced */
+    min-width: 250px;
+    height: 300px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    background-size: cover; /* Ensures the image fills the background */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Avoids tiling */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Overlay for text readability */
+.benefit-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: 0;
+}
+
+.benefit-card h3,
+.benefit-card p {
+    z-index: 1;
+    position: relative;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Individual Card Backgrounds */
+.customized {
+    background-image: url('img/img_strength.png');
+}
+
+.nutrition {
+    background-image: url('img/img_nutrition.png');
+}
+
+.motivation {
+    background-image: url('img/img_motivation.png');
+}
+
+footer {
+    text-align: center;
+    padding: 20px 10px;
+    background-color: #000; /* Fitness Walley's black theme */
+    color: white;
+    font-size: 14px;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #f91a2c; /* Fitness Walley's primary color */
+    border: 2px solid transparent;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: #f91a2c;
+    border-color: #f91a2c;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid white;
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    color: #000;
+}
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <h3>FITNESS<span class="primary-color">WAALEY</span></h3>
+    </div>
+    <div class="header-right">
+        <a href="Updated.html">Home</a>
+        <a href="Updated.html#coursing">Courses</a>
+        <a href="Updated.html#abouts">About Us</a>
+        <a href="Updated.html#footer">Contact</a>
+    </div>
+</header>
+
+<div class="hero-section">
+    <h1>Personal Training</h1>
+</div>
+
+<div class="content-section">
+    <h2>Transform Your Body with Personal Training</h2>
+    <p>
+        At Fitness Walley, our personal training program is designed to provide a tailored approach to fitness, 
+        addressing your individual goals and needs. Whether you aim to build strength, lose weight, or enhance endurance, 
+        our expert trainers will guide you every step of the way.
+    </p>
+    <p>
+        Our personal trainers are certified professionals who specialize in various disciplines, 
+        ensuring a diverse and comprehensive training experience.
+    </p>
+</div>
+
+<div class="benefits-header">
+    <h2>Benefits</h2>
+</div>
+
+<div class="benefits-section">
+    <div class="benefit-card customized">
+        <h3>Customized Plans</h3>
+        <p>Workouts designed to meet your unique fitness goals and lifestyle.</p>
+    </div>
+    <div class="benefit-card nutrition">
+        <h3>Nutrition Guidance</h3>
+        <p>Receive expert advice on meal plans and dietary habits.</p>
+    </div>
+    <div class="benefit-card motivation">
+        <h3>One-on-One Motivation</h3>
+        <p>Stay motivated with constant support from your personal trainer.</p>
+    </div>
+</div>
+
+
+<footer>
+    <p>&copy; 2024 Fitness Walley. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

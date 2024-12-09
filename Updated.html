@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>GYM</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="style2.css">
+	<link rel="server.j">
+	<style>
+		html {
+			scroll-behavior: smooth;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			overflow: auto;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.modal-content {
+			background-color: #fefefe;
+			margin: 10% auto;
+			padding: 20px;
+			border-radius: 10px;
+			width: 80%;
+			max-width: 400px;
+		}
+
+		.modal-content h2 {
+			margin-top: 0;
+			text-align: center;
+		}
+
+		.modal-content input {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+
+		.modal-content button {
+			width: 100%;
+			padding: 10px;
+			background-color: rgb(249, 26, 44);
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.modal-content button:hover {
+			background-color: rgb(200, 20, 35);
+		}
+
+		.close {
+			color: #aaa;
+			float: right;
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.close:hover,
+		.close:focus {
+			color: black;
+			text-decoration: none;
+			cursor: pointer;
+		}
+
+		.row {
+    		display: flex;
+    		justify-content: space-between; /* Distributes columns evenly with space between them */
+    		gap: 20px; /* Adds consistent spacing between columns */
+    		flex-wrap: wrap; /* Ensures items wrap to the next line if the screen is too small */
+		}
+
+		/* Style for each column */
+		.column {
+		    flex: 1 1 calc(33.333% - 20px); /* Ensures 3 columns per row with space between */
+    		max-width: calc(33.333% - 20px); /* Prevents columns from exceeding 1/3 width */
+    		box-sizing: border-box; /* Includes padding and border in the element's width */
+		}
+
+		/* Card styling */
+		.cord {
+    		background-color: #333; /* Dark background for the card */
+    		color: white; /* White text */
+    		text-align: center;
+    		border-radius: 10px;
+    		overflow: hidden; /* Ensures content stays within card boundaries */
+    		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    		padding: 15px;
+		}
+
+		/* Image styling */
+		.cord img {
+    		width: 100%; /* Ensures images take the full width of the card */
+    		height: 850px; /* Maintains image aspect ratio */
+    		border-radius: 10px 10px 0 0; /* Rounds top corners of image */
+		}
+
+		/* Container styling */
+		.container h2,
+		.container p {
+		    margin: 10px 0; /* Adds spacing between text elements */
+		}
+
+		.button {
+    		padding: 10px 20px;
+    		background-color: #f91a2c; /* Button color */
+    		color: white;
+    		border: none;
+    		border-radius: 5px;
+    		cursor: pointer;
+    		text-decoration: none;
+		}
+
+		.button:hover {
+    		background-color: #d01525; /* Darker shade on hover */
+		}
+		/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown button styling */
+.dropbtn {
+    background-color: #ff6f61; /* Change as per your theme */
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.dropbtn:hover {
+    background-color: #e65a50; /* Darker shade for hover */
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #000000;
+    box-shadow: 0 8px 16px rgb(74, 72, 72);
+    z-index: 1;
+    text-align: left;
+}
+
+.dropdown-content a {
+    color: rgb(255, 255, 255);
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ff0000;
+}
+
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+	</style>
+
+</head>
+
+<body>
+	<header>
+		<div class="logo">
+			<h3>FITNESS<span class="primary-color">WAALEY</span></h3>
+		</div>
+		<div class="header-right">
+			<button onclick="showModal('signup-modal')" class="btn btn-primary">Sign Up</button>
+			<button onclick="showModal('login-modal')" class="btn btn-secondary">Log In</button>
+			<div class="dropdown" id="hamburger-menu" style="margin-left: 10px;">
+				<button class="dropbtn">
+					<i class="fas fa-bars"></i> <!-- Hamburger Icon -->
+				</button>
+				<div class="dropdown-content">
+					<a href="#coursing">Explore Courses</a>
+					<a href="#blog-sec">Blogs</a>
+					<a href="#abouts">About Us</a>
+					<a href="#footer">Contact Us</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+
+	<!-- Signup Modal -->
+	<div id="signup-modal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal('signup-modal')">&times;</span>
+			<h2>Sign Up</h2>
+			<form id="signup-form">
+				<input type="text" id="signup-name" placeholder="Full Name" required>
+				<input type="email" id="signup-email" placeholder="Email Address" required>
+				<input type="password" id="signup-password" placeholder="Password" required>
+				<input type="password" id="signup-confirm-password" placeholder="Confirm Password" required>
+				<button type="submit">Sign Up</button>
+			</form>
+		</div>
+	</div>
+
+	<!-- Login Modal -->
+	<div id="login-modal" class="modal">
+		<div class="modal-content">
+			<span class="close" onclick="closeModal('login-modal')">&times;</span>
+			<h2>Log In</h2>
+			<form id="login-form">
+				<input type="email" id="login-email" placeholder="Email Address" required>
+				<input type="password" id="login-password" placeholder="Password" required>
+				<button type="submit">Log In</button>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		function showModal(modalId) {
+			document.getElementById(modalId).style.display = 'block';
+		}
+
+		function closeModal(modalId) {
+			document.getElementById(modalId).style.display = 'none';
+		}
+
+		// Signup form submission
+		document.getElementById('signup-form').onsubmit = async function (e) {
+			e.preventDefault();
+			const name = document.getElementById('signup-name').value;
+			const email = document.getElementById('signup-email').value;
+			const password = document.getElementById('signup-password').value;
+			const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+			if (password !== confirmPassword) {
+				alert('Passwords do not match!');
+				return;
+			}
+
+			// Send data to backend
+			try {
+				const response = await fetch('http://localhost:8080/signup', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ name, email, password })
+				});
+				const data = await response.json();
+				if (data.success) {
+					alert('Signup successful!');
+					closeModal('signup-modal');
+				} else {
+					alert(data.message);
+				}
+			} catch (error) {
+				alert('Error during signup. Please try again.');
+			}
+		};
+
+		// Login form submission
+		document.getElementById('login-form').onsubmit = async function (e) {
+			e.preventDefault();
+			const email = document.getElementById('login-email').value;
+			const password = document.getElementById('login-password').value;
+
+			// Send data to backend
+			try {
+				const response = await fetch('http://localhost:8080/login', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ email, password })
+				});
+				const data = await response.json();
+				if (data.success) {
+					alert('Login successful!');
+					closeModal('login-modal');
+				} else {
+					alert(data.message);
+				}
+			} catch (error) {
+				alert('Error during login. Please try again.');
+			}
+		};
+	</script>
+
+	<div class="hero-section">
+		<div class="hero-intro">
+			<h2> WHEN LIFE GIVES U PAIN</h2><span class="primary-color"></span></h2>
+			<h1>GO TO THE <span style="color: rgb(249, 26, 44);" >GYM</span></h1>
+			<a href="#hamburger-menu" class="btn btn-secondary">Explore More</a>
+		</div>
+	</div>
+
+	<div class="course-sec" id="coursing">
+		<div class="course-card">
+			<img src="img/xcat1.png.pagespeed.ic.zL5uz2S-Nt.webp">
+			<div class="course-intro">
+				<h1 class="course-title">Personal Training</h1>
+				<p>Our personal training, nutritional since 2019. Begin your body and lifestyle transformation journey with the best
+					personal trainers in Punjab.</p>
+				<a href="D:\Fitnesswalley\public\Personal Training.html" class="btn btn-secondary">View Course</a>
+
+			</div>
+		</div>
+		<div class="course-card">
+			<img src="img/xcat2.png.pagespeed.ic.Wh9rvcunlX.webp">
+			<div class="course-intro">
+				<h1 class="course-title">Group Training</h1>
+				<p>Our extensive group fitness timetable consists of 8 core disciplines
+					including yoga, Qinning, boxing and pilates and some other genere of your
+					aspirations..</p>
+				<a href="D:\Fitnesswalley\public\Group Training.html" class="btn btn-primary">View Course</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="offer-sec">
+		<h1 class="section-title"><span style="color:#ccc">WHAT WE</span> OFFER</h1>
+		<div class="offer-slider">
+			<button class="nav-btn prev-btn">&#10094;</button> <!-- Left navigation button -->
+			<div class="offer-row">
+				<div class="offer-card">
+					<img src="img/team1.png" alt="Body Building">
+					<div class="offer-intro">
+						<h2>Body Building</h2>
+						<p>We have some pretty amazing people working with us, <br>who hustle every day to give you the best possible experience! <br>Explore them.</p>
+					</div>
+				</div>
+				<div class="offer-card">
+					<img src="img/team2.png" alt="Muscle Gain">
+					<div class="offer-intro">
+						<h2>Muscle Gain</h2>
+						<p>Deciding how to fit out a gym or functional fitness space isn't easy,<br> which is why Fitness Walley is here to help guide you through the process.</p>
+					</div>
+				</div>
+				<div class="offer-card">
+					<img src="img/team3.png" alt="Weight Loss">
+					<div class="offer-intro">
+						<h2>Weight Loss</h2>
+						<p>Functional Trainers can lead to improved muscular balance and joint stability in athletes and can help you lose weight.</p>
+					</div>
+				</div>
+				<div class="offer-card">
+					<img src="img/team4.png" alt="Flexibility Training">
+					<div class="offer-intro">
+						<h2>Flexibility Training</h2>
+						<p>Achieve greater mobility and flexibility with our specialized training programs tailored for all levels.</p>
+					</div>
+				</div>
+				<div class="offer-card">
+					<img src="img/team5.png" alt="Endurance Training">
+					<div class="offer-intro">
+						<h2>Endurance Training</h2>
+						<p>Boost your stamina and energy levels with programs designed to improve cardiovascular health.</p>
+					</div>
+				</div>
+			</div>
+			<button class="nav-btn next-btn">&#10095;</button> <!-- Right navigation button -->
+		</div>
+	</div>
+	
+	
+	<script>
+			const offerRow = document.querySelector('.offer-row');
+const nextBtn = document.querySelector('.next-btn');
+const prevBtn = document.querySelector('.prev-btn');
+const cardWidth = document.querySelector('.offer-card').offsetWidth + 20; // Include margin
+
+let currentIndex = 0;
+
+nextBtn.addEventListener('click', () => {
+    const cards = document.querySelectorAll('.offer-card');
+    currentIndex++;
+
+    if (currentIndex > cards.length - 4) {
+        // Move first card to the end
+        const firstCard = cards[0];
+        offerRow.appendChild(firstCard.cloneNode(true));
+        offerRow.removeChild(firstCard);
+        currentIndex--;
+    }
+
+    const translateX = -currentIndex * cardWidth;
+    offerRow.style.transform = `translateX(${translateX}px)`;
+});
+
+prevBtn.addEventListener('click', () => {
+    const cards = document.querySelectorAll('.offer-card');
+    currentIndex--;
+
+    if (currentIndex < 0) {
+        // Move the last card to the front
+        const lastCard = cards[cards.length - 1];
+        offerRow.insertBefore(lastCard.cloneNode(true), cards[0]);
+        offerRow.removeChild(lastCard);
+        currentIndex++;
+    }
+
+    const translateX = -currentIndex * cardWidth;
+    offerRow.style.transform = `translateX(${translateX}px)`;
+});
+
+
+	</script>
+
+	<div class="about-sec">
+		<div class="about-card">
+			<img src="img/arya1.jpg">
+		</div>
+		<div class="about-card about-intro" id="abouts">
+			<h1>About Us</h1>
+			<p>At Fitness Walley, we are about real fitness. Our no-nonsense, results-driven culture was built on a history rooted in weightlifting culture. With our award-winning designs and culture, FitnessWalley has successfully become an internationally recognized brand known for its commitment to health, strength, and fitness. Today, we continue to be one of the most celebrated fitness brands in the world.
+			</p>
+			<a href="#" class="btn btn-secondary">Learn More</a>
+		</div>
+	</div>
+
+	<div class="blog-sec" id="blog-sec">
+		<h1 class="section-title" style="text-align: center;">FROM BLOG</h1>
+		<div class="blog-row">
+			<div class="blog-card">
+				<img src="img/aryanew.jpg">
+				<div class="blog-intro">
+					<p>Strength Training</p>
+					<a href="#">Witness the process of<br> Building Ultimate You.</a>
+				</div>
+			</div>
+			<div class="blog-card">
+				<img src="img/newpng.jpg" style="height: 76%;width: 100%;">
+				<div class="blog-intro">
+					<p>Muscle Gain</p>
+					<a href="#">We provide you the best Trainers in your Area</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="about-section">
+		<h1>Meet Our Professional Trainers</h1>
+
+	</div>
+	<div class="row">
+    	<div class="column">
+        	<div class="cord">
+            	<img src="img/Abhigyan.jpg" alt="Abhigyan Singh">
+            	<div class="container">
+                	<h2>Abhigyan Singh</h2>
+                	<p>Strength Trainer</p>
+                	<p>Winner of Mr. Delhi in 2022,2023</p>
+                	<p>Abhigyan_FitnessWalley@gmail.com</p>
+                	<p><button class="button"><a href="https://wa.me/918829053721" style="text-decoration: none;">Contact</a></button></p>
+            	</div>
+        	</div>
+    	</div>
+
+	    <div class="column">
+    	    <div class="cord">
+        	    <img src="img/Chitra.jpg" alt="Chitra Sen">
+            	<div class="container">
+                	<h2>Chitra Sen</h2>
+                	<p>Physique Trainer</p>
+                	<p>NASM-PBC from IGI Institute, Winner of Miss Haryana and Miss Delhi in 2022,2023.</p>
+                	<p>Chitra_FitnessWalley@gmail.com</p>
+                	<p><button class="button"><a href="https://wa.me/916203002398" style="text-decoration: none;">Contact</a></button></p>
+            	</div>
+        	</div>
+    	</div>
+
+	    <div class="column">
+    	    <div class="cord">
+    	        <img src="img/Bhushan.jpg" alt="Bhushan Pugalia">
+        	    <div class="container">
+            	    <h2>Bhushan Pugalia</h2>
+                	<p>Cardio Trainer</p>
+                	<p>Winner of Fitness Icon Delhi - 2024 , Mr. UP and Mr. NCR 2022</p>
+                	<p>Bhushan_FitnessWalley@gmail.com</p>
+                	<p><button class="button"><a href="https://wa.me/919142004184" style="text-decoration: none;">Contact</a></button></p>
+            	</div>
+        	</div>
+    	</div>
+	</div>
+
+	<footer>
+		<div class="copyright">
+			<p>&copy; 2024 - All rights reserved | Made With <span>&hearts;</span></p>
+		</div>
+		<div class="social-icon">
+			<a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+			<a href="https://instagram.com/parag._.singh?igshid=NzZlODBkYWE4Ng=="><i class="fa-brands fa-instagram"></i></a>
+			<a href="https://www.linkedin.com/in/parag-singh-546720261"><i class="fa-brands fa-linkedin-in"></i></a>
+			<a href="https://wa.me/qr/XIL6UAOHO7PKM1"fab fa-whatsapp"></i></a>
+			<a href="https://maps.app.goo.gl/i7UFkuChBXBf2Vwt7"><i class="fas fa-map-marker-alt"></i>  New Delhi, India</a>
+		</div>
+	</footer>
+
+</body>
+</html>
